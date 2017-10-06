@@ -24,10 +24,10 @@ class MessageInput extends Component {
     event.preventDefault();
 
     const message = this.state.value;
-    const value = '';
-
-    this.setState({ value });
     this.props.handleMessage(message);
+
+    const value = '';
+    this.setState({ value });
   }
 
   render() {

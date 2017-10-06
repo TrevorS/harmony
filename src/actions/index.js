@@ -5,23 +5,24 @@ import {
   RECEIVE_MESSAGE,
 } from './actionTypes';
 
-const joinChat = user => ({
+const joinChat = handle => ({
   type: JOIN_CHAT,
-  user,
+  handle,
 });
 
-const leaveChat = user => ({
+const leaveChat = () => ({
   type: LEAVE_CHAT,
-  user,
 });
 
-const sendMessage = text => ({
+const sendMessage = (handle, text) => ({
   type: SEND_MESSAGE,
+  handle,
   text,
 });
 
-const receiveMessage = text => ({
+const receiveMessage = (handle, text) => ({
   type: RECEIVE_MESSAGE,
+  handle,
   text,
 });
 

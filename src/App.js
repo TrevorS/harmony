@@ -1,18 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import UserWindow from './components/UserWindow';
-import ChatWindow from './components/ChatWindow';
-
-const users = [
-  { handle: 'Trevor' },
-  { handle: 'Faith-Anne' },
-];
-
-const messages = [
-  { handle: 'Trevor', text: 'Hello!' },
-  { handle: 'Faith-Anne', text: 'Hi!' },
-];
+import UserWindowContainer from './containers/UserWindowContainer';
+import ChatWindowContainer from './containers/ChatWindowContainer';
 
 const App = () => (
   <div className="App">
@@ -21,11 +11,11 @@ const App = () => (
     </div>
     <div className="App-container">
       <div className="App-users">
-        <UserWindow users={users} />
+        <UserWindowContainer />
       </div>
 
       <div className="App-chat">
-        <ChatWindow messages={messages} />
+        <ChatWindowContainer />
       </div>
     </div>
   </div>

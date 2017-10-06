@@ -1,0 +1,11 @@
+.Message {
+  padding-bottom: 15px;
+}
+
+.Message-handle {
+  font-weight: bold;
+}
+
+.Message-text {
+  padding-left: 5px;
+}

@@ -1,0 +1,23 @@
+.UserWindow {
+  background: green;
+  border-right: 2px solid black;
+  height: 100%;
+}
+
+.UserWindow h2 {
+  margin: 0;
+  padding: 15px 0 15px 5px;
+}
+
+.UserWindow ul {
+  padding: 15px 0 0 5px;
+}
+
+.UserWindow-list {
+  padding: 0;
+}
+
+.UserWindow-list li {
+  list-style: none;
+  padding-bottom: 10px;
+}

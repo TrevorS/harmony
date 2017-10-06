@@ -1,0 +1,33 @@
+.App {
+  height: 100%;
+  overflow: hidden;
+}
+
+.App-header {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.App-container {
+  display: flex;
+  height: 100%;
+}
+
+.App-users {
+  flex: 1;
+}
+
+.App-chat {
+  flex: 3;
+}
+
+.App-chat .ChatWindow {
+  height: 100%;
+}

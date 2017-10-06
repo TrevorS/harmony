@@ -1,0 +1,19 @@
+.ChatWindow {
+  background: red;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ChatWindow-messages {
+  padding-top: 15px;
+  flex: 3;
+}
+
+.ChatWindow-input {
+  flex: 1;
+}
+
+.ChatWindow-input form {
+  padding-top: 35px;
+}

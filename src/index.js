@@ -12,6 +12,8 @@ import DocumentStyle from './utils/DocumentStyle';
 
 import { joinChat, sendMessage, receiveMessage } from './actions';
 
+import Chat from './chat';
+
 import './index.css';
 
 /* eslint-disable no-underscore-dangle */
@@ -41,3 +43,14 @@ store.dispatch(sendMessage('Trevor', 'Hello!'));
 
 store.dispatch(receiveMessage('Trevor', 'Hello!'));
 store.dispatch(receiveMessage('Faith-Anne', 'Hi!'));
+
+const url = 'ws://localhost:4000/chat';
+const handle = 'Test';
+
+const chat = new Chat(url, handle);
+chat.setOnMessage((event) => {
+  console.log('cb', event);
+});
+
+chat.connect();
+chat.sendMessage('Hello this is a test!');

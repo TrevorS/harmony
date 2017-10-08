@@ -3,7 +3,7 @@ import {
   LEAVE_CHAT,
   SEND_MESSAGE,
   RECEIVE_MESSAGE,
-} from './actionTypes';
+} from './types';
 
 const joinChat = handle => ({
   type: JOIN_CHAT,

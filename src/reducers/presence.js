@@ -1,7 +1,7 @@
 import {
   JOIN_CHAT,
   LEAVE_CHAT,
-} from '../actions/actionTypes';
+} from '../actions/types';
 
 const initialState = {
   handle: null,

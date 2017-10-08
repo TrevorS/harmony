@@ -1,7 +1,7 @@
 import {
   SEND_MESSAGE,
   RECEIVE_MESSAGE,
-} from '../actions/actionTypes';
+} from '../actions/types';
 
 const initialState = {
   messages: [],

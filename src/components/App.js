@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import UserWindowContainer from './containers/UserWindowContainer';
-import ChatWindowContainer from './containers/ChatWindowContainer';
+import UserWindowContainer from '../containers/UserWindowContainer';
+import ChatWindowContainer from '../containers/ChatWindowContainer';
 
 import './App.css';
 

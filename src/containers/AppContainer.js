@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { executeJoinChat } from '../actions';
-import App from '../App';
+import App from '../components/App';
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ executeJoinChat }, dispatch);

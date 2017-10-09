@@ -5,9 +5,19 @@ import ChatWindowContainer from '../containers/ChatWindowContainer';
 
 import './App.css';
 
+// TODO: Extract into config.
+const uri = 'ws://localhost:4000/chat';
+
 class App extends Component {
   componentDidMount() {
-    this.props.executeJoinChat('Trevor');
+    this.props.websocketConnect(uri);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.isOpen && nextProps.isOpen) {
+      // TODO: Use custom handle.
+      this.props.executeJoinChat('Trevor');
+    }
   }
 
   render() {

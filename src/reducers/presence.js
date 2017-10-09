@@ -1,7 +1,7 @@
 import {
   JOIN_CHAT,
   LEAVE_CHAT,
-  RECEIVE_USERS,
+  WEBSOCKET_MESSAGE,
 } from '../actions/types';
 
 const initialState = {
@@ -10,26 +10,39 @@ const initialState = {
   isConnected: false,
 };
 
+const handleJoinChat = (state, { handle }) => ({
+  ...state,
+  isConnected: true,
+  handle,
+});
+
+const handleLeaveChat = state => ({
+  ...state,
+  ...initialState,
+});
+
+const handleWebsocketMessage = (state, { data }) => {
+  if (data && data.users) {
+    return {
+      ...state,
+      users: data.users,
+    };
+  }
+
+  return state;
+};
+
 const presence = (state = initialState, action) => {
   switch (action.type) {
     case JOIN_CHAT:
-      return {
-        ...state,
-        handle: action.handle,
-        isConnected: true,
-      };
+      return handleJoinChat(state, action);
+
     case LEAVE_CHAT:
-      return {
-        ...state,
-        handle: null,
-        users: [],
-        isConnected: false,
-      };
-    case RECEIVE_USERS:
-      return {
-        ...state,
-        users: action.users,
-      };
+      return handleLeaveChat(state);
+
+    case WEBSOCKET_MESSAGE:
+      return handleWebsocketMessage(state, action);
+
     default:
       return state;
   }

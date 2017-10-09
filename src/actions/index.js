@@ -1,41 +1,41 @@
-import { sendMessage, receiveMessages } from './messaging';
-import { joinChat, leaveChat, receiveUsers } from './presence';
+import {
+  joinChat,
+  leaveChat,
+} from './presence';
 
-import Chat from '../chat';
+import { sendMessage } from './messaging';
+import { websocketSend } from './websocket';
 
-const url = 'ws://localhost:4000/chat';
+const buildData = (action, data) => {
+  if (!data) {
+    return action;
+  }
 
-let chat;
-
-const executeSendMessage = text =>
-  (dispatch) => {
-    chat.sendMessage(text);
-
-    dispatch(sendMessage(text));
-  };
-
-const executeReceiveData = data =>
-  (dispatch) => {
-    dispatch(receiveMessages(data.messages));
-    dispatch(receiveUsers(data.users));
-  };
+  return JSON.stringify({ action, data });
+};
 
 const executeJoinChat = handle =>
   (dispatch) => {
-    chat = new Chat(url, handle);
+    const data = buildData('JOIN_CHAT', handle);
 
-    chat.setOnMessage(executeReceiveData);
-
-    chat.connect();
-
-    return dispatch(joinChat(handle));
+    dispatch(joinChat(handle));
+    dispatch(websocketSend(data));
   };
 
 const executeLeaveChat = () =>
   (dispatch) => {
-    chat.leave();
+    const data = buildData('LEAVE_CHAT');
 
     dispatch(leaveChat());
+    dispatch(websocketSend(data));
+  };
+
+const executeSendMessage = (handle, text) =>
+  (dispatch) => {
+    const data = buildData('SEND_MESSAGE', { handle, text });
+
+    dispatch(sendMessage(text));
+    dispatch(websocketSend(data));
   };
 
 export {

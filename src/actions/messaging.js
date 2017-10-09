@@ -1,13 +1,9 @@
-import { SEND_MESSAGE, RECEIVE_MESSAGES } from './types';
+import { SEND_MESSAGE } from './types';
 
 const sendMessage = text => ({
   type: SEND_MESSAGE,
   text,
 });
 
-const receiveMessages = messages => ({
-  type: RECEIVE_MESSAGES,
-  messages,
-});
-
-export { sendMessage, receiveMessages };
+// eslint-disable-next-line import/prefer-default-export
+export { sendMessage };

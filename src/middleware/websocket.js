@@ -12,14 +12,14 @@ import {
 
 let websocket;
 
-const websocketMiddleware = () => next => (action) => {
+const websocketMiddleware = store => next => (action) => {
   switch (action.type) {
     case WEBSOCKET_CONNECT:
       websocket = new WebSocket(action.uri);
 
-      websocket.onopen = websocketOpen;
-      websocket.onclose = websocketClose;
-      websocket.onmessage = websocketMessage;
+      websocket.onopen = () => store.dispatch(websocketOpen());
+      websocket.onclose = event => store.dispatch(websocketClose(event));
+      websocket.onmessage = event => store.dispatch(websocketMessage(event));
 
       break;
 

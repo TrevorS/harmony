@@ -23,8 +23,10 @@ class MessageInput extends Component {
   handleOnSubmit(event) {
     event.preventDefault();
 
-    const message = this.state.value;
-    this.props.handleMessage(message);
+    const handle = this.props.handle;
+    const text = this.state.value;
+
+    this.props.executeSendMessage(handle, text);
 
     const value = '';
     this.setState({ value });

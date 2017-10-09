@@ -9,7 +9,6 @@ import AppContainer from './containers/AppContainer';
 import HarmonyReducer from './reducers';
 
 import websocketMiddleware from './middleware/websocket';
-
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';

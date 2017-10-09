@@ -2,6 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { executeSendMessage } from '../actions';
+
 import ChatWindow from '../components/ChatWindow';
 
 const mapStateToProps = state => ({

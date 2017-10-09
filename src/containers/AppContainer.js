@@ -1,12 +1,18 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { websocketConnect } from '../actions/websocket';
 import { executeJoinChat } from '../actions';
+
 import App from '../components/App';
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ executeJoinChat }, dispatch);
+const mapStateToProps = state => ({
+  isOpen: state.websocket.isOpen,
+});
 
-const AppContainer = connect(null, mapDispatchToProps)(App);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ websocketConnect, executeJoinChat }, dispatch);
+
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 
 export default AppContainer;

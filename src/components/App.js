@@ -17,6 +17,7 @@ class App extends Component {
     if (!this.props.isOpen && nextProps.isOpen) {
       // TODO: Use custom handle.
       this.props.executeJoinChat('Trevor');
+      this.props.executeKeepAlive();
     }
   }
 

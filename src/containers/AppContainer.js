@@ -1,8 +1,12 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import {
+  executeJoinChat,
+  executeKeepAlive,
+} from '../actions';
+
 import { websocketConnect } from '../actions/websocket';
-import { executeJoinChat } from '../actions';
 
 import App from '../components/App';
 
@@ -10,8 +14,14 @@ const mapStateToProps = state => ({
   isOpen: state.websocket.isOpen,
 });
 
+const actionCreators = {
+  websocketConnect,
+  executeJoinChat,
+  executeKeepAlive,
+};
+
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ websocketConnect, executeJoinChat }, dispatch);
+  bindActionCreators(actionCreators, dispatch);
 
 const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);
 

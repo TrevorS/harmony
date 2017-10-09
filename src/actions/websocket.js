@@ -5,13 +5,15 @@ import {
   WEBSOCKET_OPEN,
   WEBSOCKET_CLOSE,
   WEBSOCKET_MESSAGE,
+  WEBSOCKET_PONG,
+  WEBSOCKET_OK,
 } from './types';
 
-const OK = 'OK';
-const PONG = 'PONG';
+const shouldIgnore = ({ data }) =>
+  data === WEBSOCKET_PONG || data === WEBSOCKET_OK;
 
 const parseData = (event) => {
-  if (event.data === OK || event.data === PONG) {
+  if (shouldIgnore(event)) {
     return null;
   }
 

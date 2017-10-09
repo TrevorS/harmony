@@ -1,34 +1,45 @@
-import {
-  JOIN_CHAT,
-  LEAVE_CHAT,
-  SEND_MESSAGE,
-  RECEIVE_MESSAGE,
-} from './types';
+import { sendMessage, receiveMessages } from './messaging';
+import { joinChat, leaveChat, receiveUsers } from './presence';
 
-const joinChat = handle => ({
-  type: JOIN_CHAT,
-  handle,
-});
+import Chat from '../chat';
 
-const leaveChat = () => ({
-  type: LEAVE_CHAT,
-});
+const url = 'ws://localhost:4000/chat';
 
-const sendMessage = (handle, text) => ({
-  type: SEND_MESSAGE,
-  handle,
-  text,
-});
+let chat;
 
-const receiveMessage = (handle, text) => ({
-  type: RECEIVE_MESSAGE,
-  handle,
-  text,
-});
+const executeSendMessage = text =>
+  (dispatch) => {
+    chat.sendMessage(text);
+
+    dispatch(sendMessage(text));
+  };
+
+const executeReceiveData = data =>
+  (dispatch) => {
+    dispatch(receiveMessages(data.messages));
+    dispatch(receiveUsers(data.users));
+  };
+
+const executeJoinChat = handle =>
+  (dispatch) => {
+    chat = new Chat(url, handle);
+
+    chat.setOnMessage(executeReceiveData);
+
+    chat.connect();
+
+    return dispatch(joinChat(handle));
+  };
+
+const executeLeaveChat = () =>
+  (dispatch) => {
+    chat.leave();
+
+    dispatch(leaveChat());
+  };
 
 export {
-  joinChat,
-  leaveChat,
-  sendMessage,
-  receiveMessage,
+  executeJoinChat,
+  executeLeaveChat,
+  executeSendMessage,
 };

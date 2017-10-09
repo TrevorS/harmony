@@ -13,9 +13,9 @@ class ChatWindow extends Component {
   }
 
   handleMessage(text) {
-    const { handle, sendMessage } = this.props;
+    const { handle, executeSendMessage } = this.props;
 
-    sendMessage(handle, text);
+    executeSendMessage(handle, text);
   }
 
   render() {

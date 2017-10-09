@@ -1,6 +1,7 @@
 import {
   JOIN_CHAT,
   LEAVE_CHAT,
+  RECEIVE_USERS,
 } from '../actions/types';
 
 const initialState = {
@@ -9,20 +10,12 @@ const initialState = {
   isConnected: false,
 };
 
-const createUser = ({ handle }) => ({
-  handle,
-});
-
 const presence = (state = initialState, action) => {
   switch (action.type) {
     case JOIN_CHAT:
       return {
         ...state,
         handle: action.handle,
-        users: [
-          ...state.users,
-          createUser(action),
-        ],
         isConnected: true,
       };
     case LEAVE_CHAT:
@@ -31,6 +24,11 @@ const presence = (state = initialState, action) => {
         handle: null,
         users: [],
         isConnected: false,
+      };
+    case RECEIVE_USERS:
+      return {
+        ...state,
+        users: action.users,
       };
     default:
       return state;

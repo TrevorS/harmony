@@ -1,34 +1,21 @@
 import {
   SEND_MESSAGE,
-  RECEIVE_MESSAGE,
+  RECEIVE_MESSAGES,
 } from '../actions/types';
 
 const initialState = {
   messages: [],
-  messageToSend: null,
-  sendingMessage: false,
 };
-
-const createMessage = ({ handle, text }) => ({
-  handle,
-  text,
-});
 
 const messaging = (state = initialState, action) => {
   switch (action.type) {
+    // Use SEND_MESSAGE to handle messaging sending notification.
     case SEND_MESSAGE:
+      return state;
+    case RECEIVE_MESSAGES:
       return {
         ...state,
-        messageToSend: createMessage(action),
-        sendingMessage: true,
-      };
-    case RECEIVE_MESSAGE:
-      return {
-        ...state,
-        messages: [
-          ...state.messages,
-          createMessage(action),
-        ],
+        messages: action.messages,
       };
     default:
       return state;

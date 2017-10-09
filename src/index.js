@@ -1,56 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-import App from './App';
+import AppContainer from './containers/AppContainer';
 import HarmonyReducer from './reducers';
 
 import registerServiceWorker from './registerServiceWorker';
 import DocumentStyle from './utils/DocumentStyle';
 
-import { joinChat, sendMessage, receiveMessage } from './actions';
-
-import Chat from './chat';
-
 import './index.css';
 
-/* eslint-disable no-underscore-dangle */
+// eslint-disable-next-line no-underscore-dangle
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  || compose;
+
 const store = createStore(
   HarmonyReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__
-    && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  composeEnhancers(
+    applyMiddleware(thunk),
+  ),
 );
-/* eslint-enable */
 
 const ds = new DocumentStyle();
 ds.setOneHundredPercentHeight();
 
 const Harmony = () => (
   <Provider store={store}>
-    <App />
+    <AppContainer />
   </Provider>
 );
 
 ReactDOM.render(<Harmony />, document.getElementById('root'));
 registerServiceWorker();
-
-store.dispatch(joinChat('Trevor'));
-store.dispatch(joinChat('Faith-Anne'));
-
-store.dispatch(sendMessage('Trevor', 'Hello!'));
-
-store.dispatch(receiveMessage('Trevor', 'Hello!'));
-store.dispatch(receiveMessage('Faith-Anne', 'Hi!'));
-
-const url = 'ws://localhost:4000/chat';
-const handle = 'Test';
-
-const chat = new Chat(url, handle);
-chat.setOnMessage((event) => {
-  console.log('cb', event);
-});
-
-chat.connect();
-chat.sendMessage('Hello this is a test!');

@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { sendMessage } from '../actions';
+import { executeSendMessage } from '../actions';
 import ChatWindow from '../components/ChatWindow';
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ sendMessage }, dispatch);
+  bindActionCreators({ executeSendMessage }, dispatch);
 
 const ChatWindowContainer = connect(mapStateToProps, mapDispatchToProps)(ChatWindow);
 

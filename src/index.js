@@ -8,6 +8,8 @@ import thunk from 'redux-thunk';
 import AppContainer from './containers/AppContainer';
 import HarmonyReducer from './reducers';
 
+import websocketMiddleware from './middleware/websocket';
+
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
@@ -19,7 +21,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 const store = createStore(
   HarmonyReducer,
   composeEnhancers(
-    applyMiddleware(thunk),
+    applyMiddleware(websocketMiddleware, thunk),
   ),
 );
 

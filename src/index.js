@@ -9,7 +9,6 @@ import AppContainer from './containers/AppContainer';
 import HarmonyReducer from './reducers';
 
 import registerServiceWorker from './registerServiceWorker';
-import DocumentStyle from './utils/DocumentStyle';
 
 import './index.css';
 
@@ -23,9 +22,6 @@ const store = createStore(
     applyMiddleware(thunk),
   ),
 );
-
-const ds = new DocumentStyle();
-ds.setOneHundredPercentHeight();
 
 const Harmony = () => (
   <Provider store={store}>

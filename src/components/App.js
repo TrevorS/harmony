@@ -6,12 +6,11 @@ import ChatWindowContainer from '../containers/ChatWindowContainer';
 
 import './App.css';
 
-// TODO: Extract into config.
-const uri = 'ws://localhost:4000/chat';
+import config from '../config';
 
 class App extends Component {
   componentDidMount() {
-    this.props.websocketConnect(uri);
+    this.props.websocketConnect(config.uri);
   }
 
   componentWillReceiveProps(nextProps) {

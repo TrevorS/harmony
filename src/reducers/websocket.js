@@ -8,22 +8,29 @@ const initialState = {
   isOpen: false,
 };
 
+const handleWebsocketOpen = state => ({
+  ...state,
+  isOpen: true,
+});
+
+const handleWebsocketClose = state => ({
+  ...state,
+  isOpen: false,
+});
+
+const handleWebsocketMessage = state => state;
+
 const websocket = (state = initialState, action) => {
   switch (action.type) {
     case WEBSOCKET_OPEN:
-      return {
-        ...state,
-        isOpen: true,
-      };
+      return handleWebsocketOpen(state);
+
     case WEBSOCKET_CLOSE:
-      return {
-        ...state,
-        isOpen: false,
-      };
+      return handleWebsocketClose(state);
+
     case WEBSOCKET_MESSAGE:
-      return {
-        ...state,
-      };
+      return handleWebsocketMessage(state);
+
     default:
       return state;
   }

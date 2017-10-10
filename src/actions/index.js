@@ -30,8 +30,10 @@ const executeJoinChat = handle =>
   };
 
 const executeLeaveChat = () =>
-  (dispatch) => {
-    const data = buildData(LEAVE_CHAT);
+  (dispatch, getState) => {
+    const handle = getState().presence.handle;
+
+    const data = buildData(LEAVE_CHAT, handle);
 
     dispatch(leaveChat());
     dispatch(websocketSend(data));

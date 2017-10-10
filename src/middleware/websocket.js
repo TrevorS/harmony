@@ -10,6 +10,8 @@ import {
   websocketMessage,
 } from '../actions/websocket';
 
+import { executeLeaveChat } from '../actions/';
+
 let websocket;
 
 const websocketMiddleware = store => next => (action) => {
@@ -21,10 +23,14 @@ const websocketMiddleware = store => next => (action) => {
       websocket.onclose = event => store.dispatch(websocketClose(event));
       websocket.onmessage = event => store.dispatch(websocketMessage(event));
 
+      window.onbeforeunload = () => store.dispatch(executeLeaveChat());
+
       break;
 
     case WEBSOCKET_DISCONNECT:
       websocket.close();
+
+      websocket = null;
 
       break;
 
